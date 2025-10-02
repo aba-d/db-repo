@@ -18,6 +18,9 @@ on:
       - main
       - integration
 
+permissions:
+  id-token: write        # required for OIDC
+
 jobs:
   # ------------------------
   # Repository Contribution Compliance Gate
@@ -47,4 +50,3 @@ jobs:
       labels: "release-2025"
       liquibase-version: "4.23.2"
 
-      
