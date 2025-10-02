@@ -35,7 +35,7 @@ jobs:
   deploy-database:
     name: Deploy Database Changes
     needs: Repository-Contribution-Compliance
-    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy-templateyml@main
+    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy-templateyml.yml@main
     with:
       aws-region: us-east-2
       role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsECSDeployRole
