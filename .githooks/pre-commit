@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Commit message file
+
+echo "Running pre-commit checks..."

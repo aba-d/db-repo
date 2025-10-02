@@ -1,0 +1,38 @@
+name: "DB Deployment Pipeline"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "dev"
+
+jobs:
+  # ------------------------
+  # Repository Contribution Compliance Gate
+  # ------------------------
+  Repository-Contribution-Compliance:
+    name: Repo Contribution Compliance
+    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/repository-contribution-compliance-template.yml@main
+    with:
+      base_branch: main
+      jira_prefix: "SCRUM|PROJ|scrum|proj"
+
+  # ------------------------
+  # Deploy Database Changes
+  # ------------------------
+  deploy-database:
+    name: Deploy Database Changes
+    needs: Repository-Contribution-Compliance
+    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy.yml@main
+    with:
+      aws-region: us-east-2
+      role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsECSDeployRole
+      secret-arn: arn:aws:secretsmanager:us-east-2:123456789012:secret:db-creds-demo-xxxxx
+      db-type: mssql
+      changelog-file: db/changelog/db.changelog-master.xml
+      liquibase-command: update
+      contexts: ${{ github.event.inputs.environment }}
+      labels: "release-2025"
+      liquibase-version: "4.23.2"

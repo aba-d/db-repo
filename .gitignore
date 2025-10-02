@@ -1,0 +1,27 @@
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE / editor files
+*.idea/
+*.vscode/
+*.iml
+
+# Ignore Liquibase output / logs
+liquibase.log
+liquibase-output.log
+
+# Ignore database-specific files (if any local temp DB files)
+*.mdf
+*.ldf
+*.bak
+*.trn
+
+# Ignore compiled files (not needed for SQL/changesets)
+*.class
+*.jar
+*.exe
+
+# Ignore environment files / secrets
+*.env
+secrets.properties
