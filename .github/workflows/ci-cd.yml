@@ -2,11 +2,11 @@ name: "DB Deployment Pipeline"
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Target environment"
-        required: true
-        default: "dev"
+    # inputs:
+    #   environment:
+    #     description: "Target environment"
+    #     required: true
+    #     default: "dev"
   push:
     branches:
       - Feature-*
