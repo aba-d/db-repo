@@ -46,7 +46,7 @@ jobs:
     with:
       aws-region: us-east-2
       role-to-assume: GitHubActionsECSDeployRole
-      secret-name: "yapp/dev/db-credentials"
+      secret-name: "myapp/dev/db-credentials"
       db-type: mssql
       changelog-file: db/changelog/db.changelog-master.xml
       liquibase-command: update
