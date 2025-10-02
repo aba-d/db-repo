@@ -45,7 +45,7 @@ jobs:
     uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy-template.yml@main
     with:
       aws-region: us-east-2
-      role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsECSDeployRole
+      role-to-assume: GitHubActionsECSDeployRole
       secret-name: "yapp/dev/db-credentials"
       db-type: mssql
       changelog-file: db/changelog/db.changelog-master.xml
