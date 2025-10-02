@@ -19,7 +19,11 @@ on:
       - integration
 
 permissions:
-  id-token: write        # required for OIDC
+  security-events: write
+  actions: read
+  contents: read
+  packages: write
+  id-token: write    # required for OIDC
 
 jobs:
   # ------------------------
@@ -50,4 +54,3 @@ jobs:
       labels: "release-2025"
       liquibase-version: "4.23.2"
       deploy-environment: "dev"
-
