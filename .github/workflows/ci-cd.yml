@@ -7,6 +7,16 @@ on:
         description: "Target environment"
         required: true
         default: "dev"
+  push:
+    branches:
+      - Feature-*
+      - main
+      - integration
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+      - integration
 
 jobs:
   # ------------------------
@@ -25,14 +35,15 @@ jobs:
   deploy-database:
     name: Deploy Database Changes
     needs: Repository-Contribution-Compliance
-    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy.yml@main
+    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/ecs-deployment-template.yml@main
     with:
       aws-region: us-east-2
       role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsECSDeployRole
-      secret-arn: arn:aws:secretsmanager:us-east-2:123456789012:secret:db-creds-demo-xxxxx
+      secret-name: "yapp/dev/db-credentials"
       db-type: mssql
       changelog-file: db/changelog/db.changelog-master.xml
       liquibase-command: update
-      contexts: ${{ github.event.inputs.environment }}
+    #   contexts: ${{ github.event.inputs.environment }}
+      contexts: "dev"
       labels: "release-2025"
       liquibase-version: "4.23.2"
