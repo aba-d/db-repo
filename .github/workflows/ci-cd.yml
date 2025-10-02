@@ -35,7 +35,7 @@ jobs:
   deploy-database:
     name: Deploy Database Changes
     needs: Repository-Contribution-Compliance
-    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/ecs-deployment-template.yml@main
+    uses: aba-enterprise/enterprise-ci-templates/.github/workflows/liquibase-deploy-templateyml@main
     with:
       aws-region: us-east-2
       role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsECSDeployRole
@@ -43,7 +43,6 @@ jobs:
       db-type: mssql
       changelog-file: db/changelog/db.changelog-master.xml
       liquibase-command: update
-    #   contexts: ${{ github.event.inputs.environment }}
       contexts: "dev"
       labels: "release-2025"
       liquibase-version: "4.23.2"
